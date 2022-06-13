@@ -39,7 +39,7 @@ jobs:
       - name: upload gobin
         uses: actions/upload-artifact@v3
         with:
-          name: gobin_${{ github.event.release.tag_name }}
+          name: gobin_${{ github.ref_name }}
           retention-days: 1
           path: |
             dist/envd_linux_amd64_v1/envd
@@ -54,7 +54,7 @@ jobs:
     - name: Get gobin
       uses: actions/download-artifact@v3
       with:
-        name: gobin_${{ github.event.release.tag_name }}
+        name: gobin_${{ github.ref_name }}
         path: dist/    
     - name: Move file to 
       run: |
