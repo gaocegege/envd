@@ -14,10 +14,10 @@ builds:
     binary: envd
     ldflags:
       - -s -w
-      - -X github.com/tensorchord/envd/pkg/version.version={{ .Version }}
-      - -X github.com/tensorchord/envd/pkg/version.buildDate={{ .Date }}
-      - -X github.com/tensorchord/envd/pkg/version.gitCommit={{ .Commit }}
-      - -X github.com/tensorchord/envd/pkg/version.gitTreeState=clean
+      - -X github.com/gaocegege/envd/pkg/version.version={{ .Version }}
+      - -X github.com/gaocegege/envd/pkg/version.buildDate={{ .Date }}
+      - -X github.com/gaocegege/envd/pkg/version.gitCommit={{ .Commit }}
+      - -X github.com/gaocegege/envd/pkg/version.gitTreeState=clean
   - env:
       - CGO_ENABLED=0
     goos:
@@ -28,10 +28,10 @@ builds:
     binary: envd-ssh
     ldflags:
       - -s -w
-      - -X github.com/tensorchord/envd/pkg/version.version={{ .Version }}
-      - -X github.com/tensorchord/envd/pkg/version.buildDate={{ .Date }}
-      - -X github.com/tensorchord/envd/pkg/version.gitCommit={{ .Commit }}
-      - -X github.com/tensorchord/envd/pkg/version.gitTreeState=clean
+      - -X github.com/gaocegege/envd/pkg/version.version={{ .Version }}
+      - -X github.com/gaocegege/envd/pkg/version.buildDate={{ .Date }}
+      - -X github.com/gaocegege/envd/pkg/version.gitCommit={{ .Commit }}
+      - -X github.com/gaocegege/envd/pkg/version.gitTreeState=clean
 archives:
   - id: envd
     format: binary
@@ -68,7 +68,7 @@ changelog:
       - '^chore:'
 dockers:
 - image_templates:
-  - "ghcr.io/tensorchord/envd-ssh-from-scratch:{{ .Version }}-amd64"
+  - "ghcr.io/gaocegege/envd-ssh-from-scratch:{{ .Version }}-amd64"
   use: buildx
   dockerfile: .goreleaser/envd-ssh.Dockerfile
   ids:
@@ -76,7 +76,7 @@ dockers:
   build_flag_templates:
   - "--platform=linux/amd64"
 - image_templates:
-  - "ghcr.io/tensorchord/envd-ssh-from-scratch:{{ .Version }}-arm64v8"
+  - "ghcr.io/gaocegege/envd-ssh-from-scratch:{{ .Version }}-arm64v8"
   use: buildx
   goarch: arm64
   ids:
@@ -85,22 +85,22 @@ dockers:
   build_flag_templates:
   - "--platform=linux/arm64/v8"
 docker_manifests:
-- name_template: ghcr.io/tensorchord/envd-ssh-from-scratch:{{ .Version }}
+- name_template: ghcr.io/gaocegege/envd-ssh-from-scratch:{{ .Version }}
   image_templates:
-  - ghcr.io/tensorchord/envd-ssh-from-scratch:{{ .Version }}-amd64
-  - ghcr.io/tensorchord/envd-ssh-from-scratch:{{ .Version }}-arm64v8
+  - ghcr.io/gaocegege/envd-ssh-from-scratch:{{ .Version }}-amd64
+  - ghcr.io/gaocegege/envd-ssh-from-scratch:{{ .Version }}-arm64v8
 brews:
   - name: envd
     ids:
       - envd
     tap:
-      owner: tensorchord
+      owner: gaocegege
       name: homebrew-tap
     commit_author:
-      name: TensorChord
-      email: envd-maintainers@tensorchord.ai
+      name: gaocegege
+      email: envd-maintainers@gaocegege.ai
     folder: Formula
-    homepage: https://envd.tensorchord.ai/
+    homepage: https://envd.gaocegege.ai/
     description: Development environment for data science and AI/ML teams
     license: Apache-2.0
     skip_upload: auto
