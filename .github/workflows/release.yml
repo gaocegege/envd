@@ -42,8 +42,7 @@ jobs:
           retention-days: 1
           path: |
             dist/envd_linux_amd64_v1/envd
-            dist/envd_darwin_amd64_v1/envd
-            dist/envd_darwin_arm64/envd
+            dist/envd_darwin_all/envd
           if-no-files-found: error
   pypi_publish:
     needs: goreleaser
