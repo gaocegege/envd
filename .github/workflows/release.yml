@@ -47,8 +47,6 @@ jobs:
           if-no-files-found: error
   pypi_publish:
     needs: goreleaser
-    # only trigger on main repo when tag starts with v
-    if: github.repository == 'tensorchord/envd' && startsWith(github.ref, 'refs/tags/v')
     runs-on: ${{ matrix.os }}
     timeout-minutes: 20
     strategy:
