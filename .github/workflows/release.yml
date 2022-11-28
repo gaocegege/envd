@@ -44,6 +44,7 @@ jobs:
           path: |
             dist/envd_linux_amd64_v1/envd
             dist/envd_darwin_amd64_v1/envd
+            dist/envd_darwin_arm64/envd
           if-no-files-found: error
   pypi_publish:
     needs: goreleaser
@@ -53,7 +54,7 @@ jobs:
     timeout-minutes: 20
     strategy:
       matrix:
-        os: [macos-11, ubuntu-20.04]
+        os: [macos-11, ubuntu-20.04, self-hosted]
     steps:
     - uses: actions/checkout@v3
     - name: Get gobin
@@ -68,10 +69,16 @@ jobs:
         mv dist/envd_linux_amd64_v1/envd bin/envd
         chmod +x bin/envd
     - name: Configure macOS build environment
-      if: runner.os == 'macOS'
+      if: runner.os == 'macOS' && runner.arch == 'X64'
       run: |
         mkdir -p bin
         mv dist/envd_darwin_amd64_v1/envd bin/envd
+        chmod +x bin/envd
+    - name: Configure macOS build environment
+      if: runner.os == 'macOS' && runner.arch == 'ARM64'
+      run: |
+        mkdir -p bin
+        mv dist/envd_darwin_arm64/envd bin/envd
         chmod +x bin/envd
     - name: Build wheels
       uses: pypa/cibuildwheel@v2.11.2
