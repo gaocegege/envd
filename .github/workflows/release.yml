@@ -51,7 +51,7 @@ jobs:
     timeout-minutes: 20
     strategy:
       matrix:
-        os: [macos-11, ubuntu-20.04, self-hosted]
+        os: [macos-11, ubuntu-20.04]
     steps:
     - uses: actions/checkout@v3
     - name: Get gobin
@@ -81,6 +81,7 @@ jobs:
       uses: pypa/cibuildwheel@v2.11.2
       env:
         CIBW_ARCHS: auto64
+        CIBW_ARCHS_MACOS: arm64, x86_64
     - name: Build source distribution
       if: runner.os == 'Linux' # Only release source under linux to avoid conflict
       run: |
