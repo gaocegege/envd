@@ -5,7 +5,7 @@ before:
     - go mod tidy
 universal_binaries:
   - id: envd
-    replace: true
+    replace: false
 builds:
   - env:
       - CGO_ENABLED=0
