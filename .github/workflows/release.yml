@@ -12,7 +12,6 @@ on:
 
 jobs:
   goreleaser:
-    if: github.repository == 'tensorchord/envd'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
